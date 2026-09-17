@@ -1,557 +1,332 @@
+/* ============================================================
+   PRUTHVI JOSHI — PORTFOLIO SCRIPT
+   Particles, Custom Cursor, Typing, Scroll Reveal, Stats, Nav
+   ============================================================ */
+
 (function () {
-    'use strict';
+  'use strict';
 
-    /**
-     * 10. PAGE LOAD
-     * Initialize all interactions when the DOM is ready.
-     * Adds 'loaded' class to body after a short delay for CSS transitions.
-     */
-    document.addEventListener('DOMContentLoaded', () => {
-        setTimeout(() => {
-            document.body.classList.add('loaded');
-        }, 100);
+  // ─── CUSTOM CURSOR ─────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const follower = document.getElementById('cursorFollower');
+  let mouseX = 0, mouseY = 0;
+  let followerX = 0, followerY = 0;
 
-        initCursor();
-        initNavbar();
-        initSmoothScroll();
-        initScrollReveal();
-        initAccordion();
-        initStatCounter();
-        initHeroCanvas();
-        initAiCanvas();
-        initEasterEgg();
+  document.addEventListener('mousemove', (e) => {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+    cursor.style.left = mouseX + 'px';
+    cursor.style.top = mouseY + 'px';
+  });
+
+  function animateFollower() {
+    followerX += (mouseX - followerX) * 0.12;
+    followerY += (mouseY - followerY) * 0.12;
+    follower.style.left = followerX + 'px';
+    follower.style.top = followerY + 'px';
+    requestAnimationFrame(animateFollower);
+  }
+  animateFollower();
+
+  // Hover effect on interactive elements
+  const hoverTargets = document.querySelectorAll('a, button, .glass-card, .floating-card, .btn, .tag, .skill-tags span');
+  hoverTargets.forEach((el) => {
+    el.addEventListener('mouseenter', () => {
+      cursor.classList.add('hover');
+      follower.classList.add('hover');
     });
+    el.addEventListener('mouseleave', () => {
+      cursor.classList.remove('hover');
+      follower.classList.remove('hover');
+    });
+  });
 
-    /**
-     * Utilities
-     */
-    const isTouchDevice = () => matchMedia('(hover:none)').matches || matchMedia('(pointer:coarse)').matches;
-    const prefersReducedMotion = () => matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ─── PARTICLE BACKGROUND ──────────────────────────────────
+  const canvas = document.getElementById('particleCanvas');
+  const ctx = canvas.getContext('2d');
+  let particles = [];
+  const PARTICLE_COUNT = 80;
+  const CONNECTION_DISTANCE = 150;
 
-    /**
-     * 1. CUSTOM CURSOR
-     * Desktop only custom cursor with lerped trailing ring.
-     */
-    function initCursor() {
-        if (isTouchDevice()) return;
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
 
-        const cursorDot = document.createElement('div');
-        cursorDot.classList.add('cursor-dot');
-        const cursorRing = document.createElement('div');
-        cursorRing.classList.add('cursor-ring');
-        const cursorLabel = document.createElement('div');
-        cursorLabel.classList.add('cursor-label');
+  class Particle {
+    constructor() {
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
+      this.vx = (Math.random() - 0.5) * 0.5;
+      this.vy = (Math.random() - 0.5) * 0.5;
+      this.radius = Math.random() * 1.5 + 0.5;
+      this.opacity = Math.random() * 0.4 + 0.1;
+    }
+    update() {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+      if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+    }
+    draw() {
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(0, 212, 255, ${this.opacity})`;
+      ctx.fill();
+    }
+  }
 
-        document.body.appendChild(cursorDot);
-        document.body.appendChild(cursorRing);
-        document.body.appendChild(cursorLabel);
+  function initParticles() {
+    particles = [];
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new Particle());
+    }
+  }
+  initParticles();
 
-        let mouseX = -100, mouseY = -100;
-        let ringX = -100, ringY = -100;
-        const lerpFactor = 0.15;
-
-        // Instantly update dot position
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-            cursorDot.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-        }, { passive: true });
-
-        // Lerp ring and update label position
-        function updateRing() {
-            ringX += (mouseX - ringX) * lerpFactor;
-            ringY += (mouseY - ringY) * lerpFactor;
-            
-            cursorRing.style.transform = `translate3d(${ringX}px, ${ringY}px, 0)`;
-            cursorLabel.style.transform = `translate3d(${mouseX + 15}px, ${mouseY + 15}px, 0)`;
-            
-            requestAnimationFrame(updateRing);
+  function drawConnections() {
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECTION_DISTANCE) {
+          const opacity = (1 - dist / CONNECTION_DISTANCE) * 0.12;
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.strokeStyle = `rgba(0, 212, 255, ${opacity})`;
+          ctx.lineWidth = 0.5;
+          ctx.stroke();
         }
-        requestAnimationFrame(updateRing);
+      }
+    }
+  }
 
-        // Hover interactions
-        const interactables = document.querySelectorAll('a, button, .project, .exp__item, .skills__item, .btn');
-        interactables.forEach(el => {
-            el.addEventListener('mouseenter', () => {
-                cursorDot.classList.add('active');
-                cursorRing.classList.add('active');
-                
-                if (el.classList.contains('project')) {
-                    cursorLabel.textContent = 'View';
-                    cursorLabel.classList.add('active');
-                }
-            });
-            
-            el.addEventListener('mouseleave', () => {
-                cursorDot.classList.remove('active');
-                cursorRing.classList.remove('active');
-                cursorLabel.classList.remove('active');
-            });
-        });
+  // Mouse attraction for particles
+  let particleMouseX = 0, particleMouseY = 0;
+  document.addEventListener('mousemove', (e) => {
+    particleMouseX = e.clientX;
+    particleMouseY = e.clientY;
+  });
+
+  function animateParticles() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach((p) => {
+      // subtle attraction to mouse
+      const dx = particleMouseX - p.x;
+      const dy = particleMouseY - p.y;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < 200 && dist > 0) {
+        p.vx += dx / dist * 0.01;
+        p.vy += dy / dist * 0.01;
+        // speed limit
+        const speed = Math.sqrt(p.vx * p.vx + p.vy * p.vy);
+        if (speed > 1.5) {
+          p.vx = (p.vx / speed) * 1.5;
+          p.vy = (p.vy / speed) * 1.5;
+        }
+      }
+      p.update();
+      p.draw();
+    });
+    drawConnections();
+    requestAnimationFrame(animateParticles);
+  }
+  animateParticles();
+
+  // ─── TYPING ANIMATION ─────────────────────────────────────
+  const roles = [
+    'AI Platform Engineer',
+    'Full Stack Developer',
+    'IoT & Automation Specialist',
+    'Computer Vision Engineer',
+    'LLM & NLP Developer',
+    'Neurotechnology Researcher'
+  ];
+  const typedEl = document.getElementById('typedText');
+  let roleIndex = 0;
+  let charIndex = 0;
+  let isDeleting = false;
+  let typingSpeed = 80;
+
+  function typeRole() {
+    const currentRole = roles[roleIndex];
+    if (!isDeleting) {
+      typedEl.textContent = currentRole.substring(0, charIndex + 1);
+      charIndex++;
+      if (charIndex === currentRole.length) {
+        isDeleting = true;
+        typingSpeed = 2000; // pause
+      } else {
+        typingSpeed = 60 + Math.random() * 40;
+      }
+    } else {
+      typedEl.textContent = currentRole.substring(0, charIndex - 1);
+      charIndex--;
+      typingSpeed = 30;
+      if (charIndex === 0) {
+        isDeleting = false;
+        roleIndex = (roleIndex + 1) % roles.length;
+        typingSpeed = 400;
+      }
+    }
+    setTimeout(typeRole, typingSpeed);
+  }
+  typeRole();
+
+  // ─── NAVBAR SCROLL BEHAVIOR ────────────────────────────────
+  const navbar = document.getElementById('navbar');
+  const sections = document.querySelectorAll('.section, .hero');
+  const navLinks = document.querySelectorAll('.nav-link');
+
+  window.addEventListener('scroll', () => {
+    // Scrolled state
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
     }
 
-    /**
-     * 2. NAVBAR SCROLL
-     * Handles sticky navbar state and active section highlighting.
-     * Also manages mobile navigation toggle.
-     */
-    function initNavbar() {
-        const nav = document.getElementById('nav');
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav__link');
-        const navToggle = document.querySelector('.nav__toggle');
-        const navLinksContainer = document.querySelector('.nav__links');
+    // Active nav link
+    let current = '';
+    sections.forEach((sec) => {
+      const top = sec.offsetTop - 120;
+      if (window.scrollY >= top) {
+        current = sec.getAttribute('id');
+      }
+    });
+    navLinks.forEach((link) => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) {
+        link.classList.add('active');
+      }
+    });
+  });
 
-        if (!nav) return;
+  // Mobile nav toggle
+  const navToggle = document.getElementById('navToggle');
+  const navLinksContainer = document.getElementById('navLinks');
 
-        let ticking = false;
+  navToggle.addEventListener('click', () => {
+    navToggle.classList.toggle('active');
+    navLinksContainer.classList.toggle('open');
+  });
+  // Close mobile nav on link click
+  navLinks.forEach((link) => {
+    link.addEventListener('click', () => {
+      navToggle.classList.remove('active');
+      navLinksContainer.classList.remove('open');
+    });
+  });
 
-        function handleScroll() {
-            // Sticky scrolled state
-            if (window.scrollY > 20) {
-                nav.classList.add('nav--scrolled');
-            } else {
-                nav.classList.remove('nav--scrolled');
-            }
+  // ─── SCROLL REVEAL ANIMATION ──────────────────────────────
+  const animElements = document.querySelectorAll('.animate-on-scroll');
 
-            // Active section highlighting
-            let currentSectionId = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop - 100;
-                if (window.scrollY >= sectionTop) {
-                    currentSectionId = section.getAttribute('id');
-                }
-            });
+  const observerOptions = {
+    root: null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold: 0.1
+  };
 
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${currentSectionId}`) {
-                    link.classList.add('active');
-                }
-            });
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  animElements.forEach((el) => observer.observe(el));
+
+  // ─── STATS COUNTER ────────────────────────────────────────
+  const statNumbers = document.querySelectorAll('.stat-number');
+  let statsCounted = false;
+
+  function countStats() {
+    if (statsCounted) return;
+    statNumbers.forEach((num) => {
+      const target = parseInt(num.getAttribute('data-count'), 10);
+      let current = 0;
+      const increment = target / 60;
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          current = target;
+          clearInterval(timer);
         }
+        num.textContent = Math.floor(current);
+      }, 25);
+    });
+    statsCounted = true;
+  }
 
-        // 11. PERFORMANCE: Throttled scroll listener
-        document.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    handleScroll();
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-
-        // Mobile menu toggle
-        if (navToggle && navLinksContainer) {
-            navToggle.addEventListener('click', () => {
-                navToggle.classList.toggle('active');
-                navLinksContainer.classList.toggle('open');
-                document.body.style.overflow = navLinksContainer.classList.contains('open') ? 'hidden' : '';
-            });
-
-            // Close on link click
-            navLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    navToggle.classList.remove('active');
-                    navLinksContainer.classList.remove('open');
-                    document.body.style.overflow = '';
-                });
-            });
-
-            // 12. ACCESSIBILITY: Close mobile menu with Escape
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && navLinksContainer.classList.contains('open')) {
-                    navToggle.classList.remove('active');
-                    navLinksContainer.classList.remove('open');
-                    document.body.style.overflow = '';
-                }
-            });
+  const statsSection = document.querySelector('.hero-stats');
+  if (statsSection) {
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          countStats();
+          statsObserver.unobserve(entry.target);
         }
-    }
+      });
+    }, { threshold: 0.5 });
+    statsObserver.observe(statsSection);
+  }
 
-    /**
-     * 3. SMOOTH SCROLL
-     * Custom smooth scrolling for anchor links.
-     */
-    function initSmoothScroll() {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return;
-                
-                const target = document.querySelector(targetId);
-                if (target) {
-                    e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
-                }
-            });
-        });
-    }
+  // ─── SMOOTH SCROLL for anchor links ───────────────────────
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
 
-    /**
-     * 4. SCROLL REVEAL
-     * IntersectionObserver implementation for scroll reveal animations.
-     */
-    function initScrollReveal() {
-        const reveals = document.querySelectorAll('.reveal');
-        if (reveals.length === 0) return;
+  // ─── TILT EFFECT on project cards ─────────────────────────
+  const projectCards = document.querySelectorAll('.project-card');
+  projectCards.forEach((card) => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const rotateX = (y - centerY) / centerY * -4;
+      const rotateY = (x - centerX) / centerX * 4;
+      card.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = 'perspective(800px) rotateX(0) rotateY(0) translateY(0)';
+    });
+  });
 
-        // Respect system motion preferences
-        if (prefersReducedMotion()) {
-            reveals.forEach(el => el.classList.add('is-visible'));
-            return;
-        }
+  // ─── MAGNETIC EFFECT on buttons ────────────────────────────
+  const buttons = document.querySelectorAll('.btn');
+  buttons.forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-2px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+    });
+  });
 
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
-                    obs.unobserve(entry.target); // Only animate once
-                }
-            });
-        }, { 
-            rootMargin: '0px 0px -80px 0px', 
-            threshold: 0.1 
-        });
-
-        reveals.forEach(el => observer.observe(el));
-    }
-
-    /**
-     * 5. EXPERIENCE ACCORDION
-     * Handles collapsible experience items.
-     */
-    function initAccordion() {
-        const expItems = document.querySelectorAll('.exp__item');
-        
-        expItems.forEach(item => {
-            const header = item.querySelector('.exp__header');
-            if (!header) return;
-
-            header.addEventListener('click', () => {
-                const isOpen = item.classList.contains('open');
-                
-                // Close all other accordions
-                expItems.forEach(otherItem => {
-                    if (otherItem !== item && otherItem.classList.contains('open')) {
-                        otherItem.classList.remove('open');
-                        const otherBody = otherItem.querySelector('.exp__body');
-                        if (otherBody) otherBody.style.maxHeight = '0px';
-                    }
-                });
-
-                // Toggle current accordion
-                if (isOpen) {
-                    item.classList.remove('open');
-                    const body = item.querySelector('.exp__body');
-                    if (body) body.style.maxHeight = '0px';
-                } else {
-                    item.classList.add('open');
-                    const body = item.querySelector('.exp__body');
-                    if (body) body.style.maxHeight = body.scrollHeight + 'px';
-                }
-            });
-        });
-    }
-
-    /**
-     * 6. STAT COUNTER
-     * Animates numbers from 0 to data-count value when scrolled into view.
-     */
-    function initStatCounter() {
-        const counters = document.querySelectorAll('[data-count]');
-        if (counters.length === 0) return;
-
-        // easeOutExpo easing function
-        const easeOutExpo = t => t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
-
-        const observer = new IntersectionObserver((entries, obs) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const targetEl = entry.target;
-                    const targetValue = parseFloat(targetEl.getAttribute('data-count'));
-                    const duration = 1500; // 1.5s
-                    let startTime = null;
-
-                    function updateCount(currentTime) {
-                        if (!startTime) startTime = currentTime;
-                        const progress = currentTime - startTime;
-                        const percent = Math.min(progress / duration, 1);
-                        
-                        const currentVal = targetValue * easeOutExpo(percent);
-                        targetEl.textContent = Math.floor(currentVal);
-
-                        if (percent < 1) {
-                            requestAnimationFrame(updateCount);
-                        } else {
-                            targetEl.textContent = targetValue; // Exact final snap
-                        }
-                    }
-
-                    requestAnimationFrame(updateCount);
-                    obs.unobserve(targetEl);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counters.forEach(counter => observer.observe(counter));
-    }
-
-    /**
-     * Canvas Common Setup Utility
-     * Handles resizing, scaling (DPR), mouse tracking, and observer-based animation loops.
-     */
-    function setupCanvas(canvas, initNodesFn, updateNodesFn, drawFn) {
-        if (!canvas) return;
-        const ctx = canvas.getContext('2d', { alpha: true });
-        
-        let width, height, dpr;
-        let nodes = [];
-        let animationFrameId;
-        let isVisible = false;
-        let mouseX = -1000, mouseY = -1000;
-
-        function resize() {
-            const rect = canvas.parentElement.getBoundingClientRect();
-            width = rect.width;
-            height = rect.height;
-            // 11. PERFORMANCE: Cap DPR at 2
-            dpr = Math.min(window.devicePixelRatio || 1, 2);
-            
-            canvas.width = width * dpr;
-            canvas.height = height * dpr;
-            ctx.scale(dpr, dpr);
-            
-            nodes = initNodesFn(width, height);
-        }
-
-        window.addEventListener('resize', resize, { passive: true });
-        resize();
-
-        // Track mouse relative to canvas
-        canvas.addEventListener('mousemove', (e) => {
-            const rect = canvas.getBoundingClientRect();
-            mouseX = e.clientX - rect.left;
-            mouseY = e.clientY - rect.top;
-        }, { passive: true });
-
-        canvas.addEventListener('mouseleave', () => {
-            mouseX = -1000;
-            mouseY = -1000;
-        });
-
-        function animate() {
-            if (!isVisible) return;
-            ctx.clearRect(0, 0, width, height);
-            
-            updateNodesFn(nodes, width, height, mouseX, mouseY);
-            drawFn(ctx, nodes, width, height);
-            
-            animationFrameId = requestAnimationFrame(animate);
-        }
-
-        // 11. PERFORMANCE: Only run canvas animation when visible
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                isVisible = entry.isIntersecting;
-                if (isVisible) {
-                    animate();
-                } else {
-                    cancelAnimationFrame(animationFrameId);
-                }
-            });
-        }, { threshold: 0 });
-        
-        observer.observe(canvas);
-    }
-
-    /**
-     * 7. HERO CANVAS
-     * Subtle neural network visualization.
-     */
-    function initHeroCanvas() {
-        const canvas = document.getElementById('heroCanvas');
-        
-        function initNodes(w, h) {
-            const arr = [];
-            for (let i = 0; i < 40; i++) {
-                arr.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.6, // random -0.3 to 0.3
-                    vy: (Math.random() - 0.5) * 0.6,
-                    radius: 1.5
-                });
-            }
-            return arr;
-        }
-
-        function updateNodes(nodes, w, h, mx, my) {
-            nodes.forEach(node => {
-                node.x += node.vx;
-                node.y += node.vy;
-
-                // Wrap around edges
-                if (node.x > w + 50) node.x = -50;
-                if (node.x < -50) node.x = w + 50;
-                if (node.y > h + 50) node.y = -50;
-                if (node.y < -50) node.y = h + 50;
-
-                // Mouse interaction: push away
-                const dx = node.x - mx;
-                const dy = node.y - my;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                
-                if (dist < 100) {
-                    const force = (100 - dist) / 100;
-                    node.vx += (dx / dist) * force * 0.05;
-                    node.vy += (dy / dist) * force * 0.05;
-                    // Dampen velocity when pushed to avoid exploding speed
-                    node.vx *= 0.95;
-                    node.vy *= 0.95;
-                } else {
-                    // Natural slow down if speed gets too high
-                    const speed = Math.sqrt(node.vx*node.vx + node.vy*node.vy);
-                    if (speed > 0.6) {
-                        node.vx *= 0.99;
-                        node.vy *= 0.99;
-                    }
-                }
-            });
-        }
-
-        function draw(ctx, nodes) {
-            // Draw connections
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 120) {
-                        const opacity = (1 - dist / 120) * 0.08;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(41,151,255, ${opacity})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Draw nodes
-            nodes.forEach(node => {
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(41,151,255, 0.15)';
-                ctx.fill();
-            });
-        }
-
-        setupCanvas(canvas, initNodes, updateNodes, draw);
-    }
-
-    /**
-     * 8. AI SHOWCASE CANVAS
-     * Simpler, slower floating particles.
-     */
-    function initAiCanvas() {
-        const canvas = document.getElementById('aiCanvas');
-        
-        function initNodes(w, h) {
-            const arr = [];
-            for (let i = 0; i < 25; i++) {
-                arr.push({
-                    x: Math.random() * w,
-                    y: Math.random() * h,
-                    vx: (Math.random() - 0.5) * 0.3,
-                    vy: (Math.random() - 0.5) * 0.3,
-                    radius: 1
-                });
-            }
-            return arr;
-        }
-
-        function updateNodes(nodes, w, h) {
-            nodes.forEach(node => {
-                node.x += node.vx;
-                node.y += node.vy;
-
-                // Wrap
-                if (node.x > w + 20) node.x = -20;
-                if (node.x < -20) node.x = w + 20;
-                if (node.y > h + 20) node.y = -20;
-                if (node.y < -20) node.y = h + 20;
-            });
-        }
-
-        function draw(ctx, nodes) {
-            // Draw connections
-            for (let i = 0; i < nodes.length; i++) {
-                for (let j = i + 1; j < nodes.length; j++) {
-                    const dx = nodes[i].x - nodes[j].x;
-                    const dy = nodes[i].y - nodes[j].y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 100) {
-                        const opacity = (1 - dist / 100) * 0.06;
-                        ctx.beginPath();
-                        ctx.moveTo(nodes[i].x, nodes[i].y);
-                        ctx.lineTo(nodes[j].x, nodes[j].y);
-                        ctx.strokeStyle = `rgba(41,151,255, ${opacity})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.stroke();
-                    }
-                }
-            }
-
-            // Draw nodes
-            nodes.forEach(node => {
-                ctx.beginPath();
-                ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
-                ctx.fillStyle = 'rgba(41,151,255, 0.1)';
-                ctx.fill();
-            });
-        }
-
-        setupCanvas(canvas, initNodes, updateNodes, draw);
-    }
-
-    /**
-     * 9. EASTER EGG
-     * Opens a terminal overlay on Cmd+Shift+K / Ctrl+Shift+K.
-     */
-    function initEasterEgg() {
-        const overlay = document.querySelector('.terminal-overlay');
-        if (!overlay) return;
-
-        function closeTerminal() {
-            overlay.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        document.addEventListener('keydown', (e) => {
-            // Match Ctrl+Shift+K or Cmd+Shift+K
-            if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLowerCase() === 'k') {
-                e.preventDefault();
-                overlay.classList.add('active');
-                document.body.style.overflow = 'hidden'; // Prevent background scrolling
-            }
-            
-            // 12. ACCESSIBILITY: Close on Escape
-            if (e.key === 'Escape' && overlay.classList.contains('active')) {
-                closeTerminal();
-            }
-        });
-
-        // Close on background click
-        overlay.addEventListener('click', (e) => {
-            if (e.target === overlay) {
-                closeTerminal();
-            }
-        });
-    }
+  // ─── PAGE LOAD ANIMATION ──────────────────────────────────
+  window.addEventListener('load', () => {
+    document.body.style.opacity = '0';
+    document.body.style.transition = 'opacity 0.6s ease';
+    requestAnimationFrame(() => {
+      document.body.style.opacity = '1';
+    });
+  });
 
 })();

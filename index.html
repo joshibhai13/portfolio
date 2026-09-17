@@ -3,419 +3,440 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pruthvi Joshi — AI Engineer & Full Stack Developer</title>
-  <meta name="description" content="Pruthvi Joshi — AI Platform Engineer and Full Stack Developer building intelligent systems across AI, LLMs, Computer Vision, and Automation." />
+  <title>Pruthvi Joshi — AI Platform Engineer | Full Stack Developer</title>
+  <meta name="description" content="Portfolio of Pruthvi Joshi — AI Platform Engineer, Full Stack Developer, and IoT & Automation Specialist building intelligent, scalable systems." />
+  <meta name="keywords" content="Pruthvi Joshi, AI Engineer, Full Stack Developer, IoT, Portfolio, LLM, Computer Vision" />
   <meta name="author" content="Pruthvi Joshi" />
-  <meta property="og:title" content="Pruthvi Joshi — AI Engineer & Developer" />
-  <meta property="og:description" content="Building intelligent systems that turn ideas into experiences. AI, LLMs, Computer Vision, Full Stack." />
+  <meta property="og:title" content="Pruthvi Joshi — AI Platform Engineer" />
+  <meta property="og:description" content="Building intelligent, scalable systems across AI, LLMs, Computer Vision, Automation, IoT, and Full Stack Development." />
   <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://joshibhai13.github.io/portfolio/" />
-  <link rel="canonical" href="https://joshibhai13.github.io/portfolio/" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- Custom cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
 
-  <!-- ═══════════════════════════════════════════════════
-       NAVIGATION
-       ═══════════════════════════════════════════════════ -->
-  <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
-    <div class="nav__inner">
-      <a href="#hero" class="nav__logo" aria-label="Home">Pruthvi Joshi</a>
-      <ul class="nav__links" id="navLinks" role="list">
-        <li><a href="#about" class="nav__link">About</a></li>
-        <li><a href="#experience" class="nav__link">Experience</a></li>
-        <li><a href="#work" class="nav__link">Work</a></li>
-        <li><a href="#skills" class="nav__link">Skills</a></li>
-        <li><a href="#contact" class="nav__link">Contact</a></li>
-      </ul>
-      <button class="nav__toggle" id="navToggle" aria-label="Toggle navigation menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+  <!-- Particle canvas background -->
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <a href="#hero" class="nav-logo">
+      <span class="logo-bracket">&lt;</span>PJ<span class="logo-bracket"> /&gt;</span>
+    </a>
+    <div class="nav-links" id="navLinks">
+      <a href="#about" class="nav-link" data-text="About">About</a>
+      <a href="#experience" class="nav-link" data-text="Experience">Experience</a>
+      <a href="#projects" class="nav-link" data-text="Projects">Projects</a>
+      <a href="#skills" class="nav-link" data-text="Skills">Skills</a>
+      <a href="#certifications" class="nav-link" data-text="Certs">Certs</a>
+      <a href="#research" class="nav-link" data-text="Research">Research</a>
+      <a href="#contact" class="nav-link" data-text="Contact">Contact</a>
     </div>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
   </nav>
 
-  <!-- ═══════════════════════════════════════════════════
-       01 — HERO
-       ═══════════════════════════════════════════════════ -->
+  <!-- ===================== HERO ===================== -->
   <section class="hero" id="hero">
-    <canvas class="hero__canvas" id="heroCanvas" aria-hidden="true"></canvas>
-    <div class="hero__content">
-      <p class="hero__eyebrow reveal">
-        <span class="hero__eyebrow-dot" aria-hidden="true"></span>
+    <div class="hero-bg-grid"></div>
+    <div class="hero-content">
+      <div class="hero-badge animate-on-scroll">
+        <span class="badge-dot"></span>
         Available for opportunities
+      </div>
+      <h1 class="hero-title animate-on-scroll">
+        <span class="hero-greeting">Hello, I'm</span>
+        <span class="hero-name glitch" data-text="Pruthvi Joshi">Pruthvi Joshi</span>
+      </h1>
+      <div class="hero-roles animate-on-scroll">
+        <span class="role-text" id="typedText"></span>
+        <span class="role-cursor">|</span>
+      </div>
+      <p class="hero-description animate-on-scroll">
+        Building intelligent, scalable systems across <span class="highlight">Artificial Intelligence</span>,
+        <span class="highlight">Large Language Models</span>, <span class="highlight">Computer Vision</span>,
+        and <span class="highlight">Full Stack Development</span>.
       </p>
-      <h1 class="hero__name reveal reveal--delay-1">Pruthvi Joshi</h1>
-      <p class="hero__tagline reveal reveal--delay-2">
-        Building intelligent systems that turn ideas into experiences.
-      </p>
-      <div class="hero__cta reveal reveal--delay-3">
-        <a href="#work" class="btn btn--primary">
-          Explore my work
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 17 5-5-5-5"/><path d="m13 17 5-5-5-5"/></svg>
+      <div class="hero-cta animate-on-scroll">
+        <a href="#projects" class="btn btn-primary">
+          <span>View My Work</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="#contact" class="btn btn--secondary">Get in touch</a>
+        <a href="#contact" class="btn btn-outline">
+          <span>Get In Touch</span>
+        </a>
+      </div>
+      <div class="hero-socials animate-on-scroll">
+        <a href="https://github.com/joshibhai13" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="GitHub">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </a>
+        <a href="https://www.linkedin.com/in/pruthvi-joshi-737b76204/" target="_blank" rel="noopener noreferrer" class="social-link" aria-label="LinkedIn">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="mailto:pruthvijsh09@gmail.com" class="social-link" aria-label="Email">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats animate-on-scroll">
+        <div class="stat-item">
+          <span class="stat-number" data-count="3">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="10">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Projects Built</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-number" data-count="15">0</span><span class="stat-plus">+</span>
+          <span class="stat-label">Technologies</span>
+        </div>
       </div>
     </div>
-    <div class="hero__scroll" aria-hidden="true">
-      <span>Scroll</span>
-      <div class="hero__scroll-line"></div>
+    <div class="scroll-indicator animate-on-scroll">
+      <div class="scroll-mouse">
+        <div class="scroll-wheel"></div>
+      </div>
+      <span>Scroll Down</span>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       02 — ABOUT
-       ═══════════════════════════════════════════════════ -->
+  <!-- ===================== ABOUT ===================== -->
   <section class="section" id="about">
     <div class="container">
-      <span class="section__label reveal">01 / 07 — About</span>
-      <div class="about__grid">
-        <div class="about__intro">
-          <h2 class="section__heading reveal">
-            AI Platform Engineer.<br/>Full Stack Developer.<br/>Builder.
-          </h2>
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">01.</span> About Me
+      </h2>
+      <div class="about-grid">
+        <div class="about-text animate-on-scroll">
+          <p>
+            I'm a <strong>results-driven AI Platform Engineer</strong> and <strong>Full Stack Developer</strong>
+            with a passion for building intelligent, scalable systems. My expertise spans across
+            <em>Artificial Intelligence, Large Language Models, Computer Vision, Automation, IoT,</em>
+            and <em>Full Stack Development</em>.
+          </p>
+          <p>
+            I've delivered end-to-end AI-powered solutions, including a <strong>self-extensible AI assistant</strong>
+            featuring real-time data processing, voice interaction, computer vision, automation,
+            remote access, and autonomous task orchestration.
+          </p>
+          <p>
+            I'm skilled in designing <strong>modular architectures</strong>, integrating advanced AI technologies,
+            and developing innovative products that enhance productivity and user experience. Currently based
+            in <strong>Ahmedabad, Gujarat</strong>.
+          </p>
+          <div class="about-info-grid">
+            <div class="info-item">
+              <span class="info-icon">📍</span>
+              <div>
+                <span class="info-label">Location</span>
+                <span class="info-value">Ahmedabad, Gujarat</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🎓</span>
+              <div>
+                <span class="info-label">Education</span>
+                <span class="info-value">B.Tech — Computer Science</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">💼</span>
+              <div>
+                <span class="info-label">Current Role</span>
+                <span class="info-value">System Analyst — AI & Automation</span>
+              </div>
+            </div>
+            <div class="info-item">
+              <span class="info-icon">🚀</span>
+              <div>
+                <span class="info-label">Focus</span>
+                <span class="info-value">AI, LLMs & Full Stack</span>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="about__text">
-          <p class="reveal">
-            I'm a results-driven engineer with <strong>3+ years of experience</strong> building intelligent, scalable systems. My work spans <strong>Artificial Intelligence</strong>, <strong>Large Language Models</strong>, <strong>Computer Vision</strong>, <strong>Automation</strong>, <strong>IoT</strong>, and <strong>Full Stack Development</strong>.
-          </p>
-          <p class="reveal">
-            I've delivered end-to-end AI-powered solutions — including a <strong>self-extensible AI assistant</strong> featuring real-time data processing, voice interaction, computer vision, and autonomous task orchestration.
-          </p>
-          <p class="reveal">
-            I design modular architectures, integrate advanced AI technologies, and build products that enhance productivity and user experience.
-          </p>
-          <ul class="about__details reveal">
-            <li class="about__detail">
-              <span class="about__detail-label">Location</span>
-              <span class="about__detail-value">Ahmedabad, Gujarat</span>
-            </li>
-            <li class="about__detail">
-              <span class="about__detail-label">Education</span>
-              <span class="about__detail-value">B.Tech — Computer Science, AD Patel Institute of Technology</span>
-            </li>
-            <li class="about__detail">
-              <span class="about__detail-label">Current</span>
-              <span class="about__detail-value">System Analyst — AI & Automation at Foiwe Info Global Solutions</span>
-            </li>
-            <li class="about__detail">
-              <span class="about__detail-label">Focus</span>
-              <span class="about__detail-value">AI Systems, LLM Applications, Full Stack Engineering</span>
-            </li>
-          </ul>
+        <div class="about-visual animate-on-scroll">
+          <div class="about-card-stack">
+            <div class="floating-card card-1">
+              <div class="card-icon">🧠</div>
+              <span>AI & LLMs</span>
+            </div>
+            <div class="floating-card card-2">
+              <div class="card-icon">⚡</div>
+              <span>Full Stack</span>
+            </div>
+            <div class="floating-card card-3">
+              <div class="card-icon">🤖</div>
+              <span>IoT & Robotics</span>
+            </div>
+            <div class="floating-card card-4">
+              <div class="card-icon">👁️</div>
+              <span>Computer Vision</span>
+            </div>
+            <div class="floating-card card-5">
+              <div class="card-icon">🔗</div>
+              <span>Blockchain</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       03 — EXPERIENCE
-       ═══════════════════════════════════════════════════ -->
-  <section class="section section--light" id="experience">
+  <!-- ===================== EXPERIENCE ===================== -->
+  <section class="section section-alt" id="experience">
     <div class="container">
-      <span class="section__label reveal">02 / 07 — Experience</span>
-      <h2 class="section__heading reveal">Where I've worked</h2>
-      <div class="exp__list">
-
-        <div class="exp__item reveal" id="exp-foiwe">
-          <div class="exp__header" role="button" tabindex="0" aria-expanded="false">
-            <div>
-              <h3 class="exp__role">System Analyst — AI & Automation</h3>
-              <p class="exp__company">Foiwe Info Global Solutions</p>
-            </div>
-            <div class="exp__header-right">
-              <span class="exp__date">Feb 2026 — Present</span>
-              <span class="exp__toggle" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </div>
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">02.</span> Work Experience
+      </h2>
+      <div class="timeline">
+        <!-- Job 1 -->
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
           </div>
-          <div class="exp__body">
-            <ul class="exp__details">
-              <li>Architect and implement AI-driven automation pipelines using LLMs, prompt engineering, and agent orchestration frameworks — accelerating analytical workflows by 40%.</li>
+          <div class="timeline-content glass-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title">System Analyst — AI & Automation</h3>
+                <p class="timeline-company">Foiwe Info Global Solutions</p>
+                <p class="timeline-location">📍 Ahmedabad, Gujarat</p>
+              </div>
+              <span class="timeline-date">Feb 2026 – Present</span>
+            </div>
+            <ul class="timeline-details">
+              <li>Architect and implement AI-driven automation pipelines using LLMs, prompt engineering, and agent orchestration frameworks — accelerating analytical workflows by <strong>40%</strong>.</li>
               <li>Design end-to-end system architectures translating complex stakeholder requirements into functional specifications, reducing delivery timelines significantly.</li>
               <li>Lead gap analysis and root cause analysis initiatives, optimizing cross-functional processes and improving operational efficiency.</li>
               <li>Collaborate with engineering and product teams on solution design, testing, validation, and deployment for scalable AI systems.</li>
             </ul>
-            <div class="exp__tags">
-              <span class="exp__tag">LLMs</span>
-              <span class="exp__tag">Agent Orchestration</span>
-              <span class="exp__tag">Prompt Engineering</span>
-              <span class="exp__tag">System Architecture</span>
+            <div class="timeline-tags">
+              <span class="tag">LLMs</span>
+              <span class="tag">Agent Orchestration</span>
+              <span class="tag">Prompt Engineering</span>
+              <span class="tag">System Architecture</span>
             </div>
           </div>
         </div>
 
-        <div class="exp__item reveal" id="exp-bhumitat">
-          <div class="exp__header" role="button" tabindex="0" aria-expanded="false">
-            <div>
-              <h3 class="exp__role">Software Developer — AI, Blockchain & Full Stack</h3>
-              <p class="exp__company">Bhumitat Technologies</p>
-            </div>
-            <div class="exp__header-right">
-              <span class="exp__date">Feb 2022 — Aug 2024</span>
-              <span class="exp__toggle" aria-hidden="true">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-              </span>
-            </div>
+        <!-- Job 2 -->
+        <div class="timeline-item animate-on-scroll">
+          <div class="timeline-marker">
+            <div class="timeline-dot"></div>
           </div>
-          <div class="exp__body">
-            <ul class="exp__details">
+          <div class="timeline-content glass-card">
+            <div class="timeline-header">
+              <div>
+                <h3 class="timeline-title">Software Developer — AI, Blockchain & Full Stack</h3>
+                <p class="timeline-company">Bhumitat Technologies</p>
+                <p class="timeline-location">📍 Gujarat</p>
+              </div>
+              <span class="timeline-date">Feb 2022 – Aug 2024</span>
+            </div>
+            <ul class="timeline-details">
               <li>Developed and tested scalable web interfaces for enterprise applications; handled backend API integration and cross-functional bug resolution.</li>
               <li>Built automated test suites using Selenium WebDriver and PyTest, improving test coverage and release stability.</li>
               <li>Developed an AI-powered Voice Assistant System using Python and AI technologies.</li>
               <li>Implemented Speech-to-Text and Neural Text-to-Speech modules for natural voice-based interaction.</li>
               <li>Integrated NLP, LLMs, and API-based services to generate intelligent responses.</li>
             </ul>
-            <div class="exp__tags">
-              <span class="exp__tag">Python</span>
-              <span class="exp__tag">React</span>
-              <span class="exp__tag">Selenium</span>
-              <span class="exp__tag">NLP</span>
-              <span class="exp__tag">Blockchain</span>
+            <div class="timeline-tags">
+              <span class="tag">Python</span>
+              <span class="tag">React</span>
+              <span class="tag">Selenium</span>
+              <span class="tag">NLP</span>
+              <span class="tag">Blockchain</span>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       04 — FEATURED: AI ASSISTANT
-       ═══════════════════════════════════════════════════ -->
-  <section class="ai-showcase" id="ai-showcase">
-    <canvas class="ai-showcase__canvas" id="aiCanvas" aria-hidden="true"></canvas>
+  <!-- ===================== PROJECTS ===================== -->
+  <section class="section" id="projects">
     <div class="container">
-      <span class="section__label reveal">03 / 07 — Featured Project</span>
-      <h2 class="ai-showcase__heading reveal">
-        Multifunctional Self-Building<br/>AI Assistant
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">03.</span> Featured Projects
       </h2>
-      <p class="ai-showcase__desc reveal">
-        An AI system that doesn't just respond — it builds itself. A self-extensible architecture that dynamically adds new capabilities through natural language instructions.
-      </p>
-      <div class="ai-showcase__features">
-        <div class="ai-showcase__feature reveal">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">Voice Intelligence</h3>
-          <p class="ai-showcase__feature-desc">NLP, Speech Recognition, and Neural Text-to-Speech for natural interaction</p>
-        </div>
-        <div class="ai-showcase__feature reveal reveal--delay-1">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">Computer Vision</h3>
-          <p class="ai-showcase__feature-desc">Real-time visual processing with OpenCV for smart system management</p>
-        </div>
-        <div class="ai-showcase__feature reveal reveal--delay-2">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">Self-Extensible</h3>
-          <p class="ai-showcase__feature-desc">Dynamically generates and integrates new features from natural language</p>
-        </div>
-        <div class="ai-showcase__feature reveal reveal--delay-1">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">LLM Integration</h3>
-          <p class="ai-showcase__feature-desc">Contextual response generation powered by Large Language Models</p>
-        </div>
-        <div class="ai-showcase__feature reveal reveal--delay-2">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">Automation</h3>
-          <p class="ai-showcase__feature-desc">Remote access, task orchestration, and intelligent workflow automation</p>
-        </div>
-        <div class="ai-showcase__feature reveal reveal--delay-3">
-          <span class="ai-showcase__feature-icon" aria-hidden="true">◉</span>
-          <h3 class="ai-showcase__feature-title">Real-time Search</h3>
-          <p class="ai-showcase__feature-desc">Live web search with contextual response generation and GUI interface</p>
-        </div>
-      </div>
-      <div class="ai-showcase__tech reveal">
-        <span>Python</span><span>PyQt5</span><span>LLMs</span><span>OpenCV</span><span>Flask</span><span>NLP</span><span>STT/TTS</span>
-      </div>
-    </div>
-  </section>
+      <div class="projects-grid">
 
-  <!-- ═══════════════════════════════════════════════════
-       05 — PROJECTS
-       ═══════════════════════════════════════════════════ -->
-  <section class="section" id="work">
-    <div class="container">
-      <span class="section__label reveal">04 / 07 — Selected Work</span>
-      <h2 class="section__heading reveal">Projects</h2>
-      <div class="projects__list">
-
-        <article class="project reveal">
-          <div class="project__content">
-            <span class="project__number">01</span>
-            <h3 class="project__name">Gavedu</h3>
-            <p class="project__positioning">Blockchain-Powered Connectivity Platform</p>
-            <p class="project__desc">
-              PM-WANI and blockchain-powered connectivity platform. Contributed to AI-driven modules, API integration, system enhancement, feature validation, debugging, and platform performance optimization for scalable digital infrastructure.
-            </p>
-            <div class="project__tech">
-              <span>Blockchain</span><span>Smart Contracts</span><span>APIs</span><span>AI Modules</span><span>PM-WANI</span>
+        <!-- Project 1 -->
+        <div class="project-card glass-card animate-on-scroll" id="project-ai-assistant">
+          <div class="project-glow"></div>
+          <div class="project-header">
+            <div class="project-icon">🧠</div>
+            <div class="project-links">
+              <span class="project-badge">Featured</span>
             </div>
           </div>
-          <div class="project__visual" aria-hidden="true">
-            <svg class="project__visual-inner" viewBox="0 0 200 200" fill="none">
-              <circle cx="100" cy="100" r="60" stroke="rgba(41,151,255,0.15)" stroke-width="0.5"/>
-              <circle cx="100" cy="100" r="40" stroke="rgba(41,151,255,0.1)" stroke-width="0.5"/>
-              <circle cx="100" cy="100" r="80" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="40" y1="100" x2="160" y2="100" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="100" y1="40" x2="100" y2="160" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <circle cx="60" cy="60" r="2" fill="rgba(41,151,255,0.3)"/>
-              <circle cx="140" cy="60" r="2" fill="rgba(41,151,255,0.3)"/>
-              <circle cx="60" cy="140" r="2" fill="rgba(41,151,255,0.3)"/>
-              <circle cx="140" cy="140" r="2" fill="rgba(41,151,255,0.3)"/>
-              <circle cx="100" cy="40" r="2" fill="rgba(41,151,255,0.3)"/>
-              <circle cx="100" cy="160" r="2" fill="rgba(41,151,255,0.3)"/>
-            </svg>
+          <h3 class="project-title">Multifunctional Self-Building AI Assistant</h3>
+          <p class="project-description">
+            AI-powered Voice Assistant with NLP, LLMs, Speech Recognition, Neural TTS, real-time web search,
+            computer vision, remote access, and a self-extensible architecture that dynamically adds features
+            through natural language instructions.
+          </p>
+          <div class="project-tech">
+            <span>Python</span><span>PyQt5</span><span>LLMs</span><span>OpenCV</span>
+            <span>Flask</span><span>NLP</span><span>STT/TTS</span>
           </div>
-        </article>
+          <div class="project-date">September 2025 – Present</div>
+        </div>
 
-        <article class="project reveal">
-          <div class="project__content">
-            <span class="project__number">02</span>
-            <h3 class="project__name">Home Automation & Drone Navigation</h3>
-            <p class="project__positioning">IoT & Autonomous Systems</p>
-            <p class="project__desc">
-              IoT-based smart home automation system with voice control integration. Python-driven drone navigation using sensor fusion for autonomous flight and intelligent environment interaction.
-            </p>
-            <div class="project__tech">
-              <span>IoT</span><span>Python</span><span>Sensors</span><span>Voice Control</span><span>Drone Navigation</span>
+        <!-- Project 2 -->
+        <div class="project-card glass-card animate-on-scroll" id="project-gavedu">
+          <div class="project-glow"></div>
+          <div class="project-header">
+            <div class="project-icon">🔗</div>
+            <div class="project-links">
+              <span class="project-badge">Blockchain</span>
             </div>
           </div>
-          <div class="project__visual" aria-hidden="true">
-            <svg class="project__visual-inner" viewBox="0 0 200 200" fill="none">
-              <rect x="60" y="60" width="80" height="80" rx="4" stroke="rgba(41,151,255,0.12)" stroke-width="0.5"/>
-              <rect x="75" y="75" width="50" height="50" rx="2" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="60" y1="60" x2="30" y2="30" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="140" y1="60" x2="170" y2="30" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="60" y1="140" x2="30" y2="170" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <line x1="140" y1="140" x2="170" y2="170" stroke="rgba(41,151,255,0.08)" stroke-width="0.5"/>
-              <circle cx="30" cy="30" r="3" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="170" cy="30" r="3" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="30" cy="170" r="3" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="170" cy="170" r="3" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="100" cy="100" r="4" fill="rgba(41,151,255,0.25)"/>
-            </svg>
+          <h3 class="project-title">Gavedu — Blockchain-Powered Connectivity</h3>
+          <p class="project-description">
+            PM-WANI and blockchain-powered connectivity platform. Contributed to AI-driven modules,
+            API integration, system enhancement, feature validation, debugging, and platform performance
+            optimization for scalable digital infrastructure.
+          </p>
+          <div class="project-tech">
+            <span>Blockchain</span><span>Smart Contracts</span><span>APIs</span>
+            <span>AI Modules</span><span>PM-WANI</span>
           </div>
-        </article>
+        </div>
 
-        <article class="project reveal">
-          <div class="project__content">
-            <span class="project__number">03</span>
-            <h3 class="project__name">Parking Management System</h3>
-            <p class="project__positioning">Full Stack MERN Application</p>
-            <p class="project__desc">
-              Full-stack real-time parking management with role-based access control, live slot tracking, JWT authentication, and complete REST API integration.
-            </p>
-            <div class="project__tech">
-              <span>MongoDB</span><span>Express</span><span>React</span><span>Node.js</span><span>JWT</span><span>REST API</span>
+        <!-- Project 3 -->
+        <div class="project-card glass-card animate-on-scroll" id="project-home-automation">
+          <div class="project-glow"></div>
+          <div class="project-header">
+            <div class="project-icon">🏠</div>
+            <div class="project-links">
+              <span class="project-badge">IoT</span>
             </div>
           </div>
-          <div class="project__visual" aria-hidden="true">
-            <svg class="project__visual-inner" viewBox="0 0 200 200" fill="none">
-              <rect x="40" y="80" width="35" height="50" rx="2" stroke="rgba(41,151,255,0.12)" stroke-width="0.5"/>
-              <rect x="82" y="60" width="35" height="70" rx="2" stroke="rgba(41,151,255,0.12)" stroke-width="0.5"/>
-              <rect x="124" y="90" width="35" height="40" rx="2" stroke="rgba(41,151,255,0.12)" stroke-width="0.5"/>
-              <line x1="40" y1="140" x2="160" y2="140" stroke="rgba(41,151,255,0.1)" stroke-width="0.5"/>
-              <circle cx="57" cy="72" r="2" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="100" cy="52" r="2" fill="rgba(41,151,255,0.2)"/>
-              <circle cx="142" cy="82" r="2" fill="rgba(41,151,255,0.2)"/>
-            </svg>
+          <h3 class="project-title">Home Automation & Drone Navigation</h3>
+          <p class="project-description">
+            IoT-based smart home automation system with voice control integration. Python-driven drone
+            navigation using sensor fusion for autonomous flight and intelligent environment interaction.
+          </p>
+          <div class="project-tech">
+            <span>IoT</span><span>Python</span><span>Sensors</span>
+            <span>Voice Control</span><span>Drone Nav</span>
           </div>
-        </article>
+        </div>
+
+        <!-- Project 4 -->
+        <div class="project-card glass-card animate-on-scroll" id="project-parking">
+          <div class="project-glow"></div>
+          <div class="project-header">
+            <div class="project-icon">🅿️</div>
+            <div class="project-links">
+              <span class="project-badge">Full Stack</span>
+            </div>
+          </div>
+          <h3 class="project-title">Parking Management System</h3>
+          <p class="project-description">
+            Full-stack real-time parking management with role-based access control, live slot tracking,
+            JWT authentication, and complete REST API integration. Built with the MERN stack.
+          </p>
+          <div class="project-tech">
+            <span>MongoDB</span><span>Express</span><span>React</span>
+            <span>Node.js</span><span>JWT</span><span>REST API</span>
+          </div>
+        </div>
 
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       06 — SKILLS
-       ═══════════════════════════════════════════════════ -->
-  <section class="section section--light" id="skills">
+  <!-- ===================== SKILLS ===================== -->
+  <section class="section section-alt" id="skills">
     <div class="container">
-      <span class="section__label reveal">05 / 07 — Capabilities</span>
-      <h2 class="section__heading reveal">Technical expertise</h2>
-      <div class="skills__grid">
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">04.</span> Technical Arsenal
+      </h2>
+      <div class="skills-grid">
 
-        <div class="skills__category reveal">
+        <div class="skill-category glass-card animate-on-scroll" id="skill-ai">
+          <div class="skill-icon-wrap"><span class="skill-icon">🤖</span></div>
           <h3>AI / Machine Learning</h3>
-          <div class="skills__list">
-            <span class="skills__item">LLMs</span>
-            <span class="skills__item">RAG</span>
-            <span class="skills__item">LangChain</span>
-            <span class="skills__item">LangGraph</span>
-            <span class="skills__item">LlamaIndex</span>
-            <span class="skills__item">Prompt Engineering</span>
-            <span class="skills__item">Agent Orchestration</span>
-            <span class="skills__item">Memory Architectures</span>
-            <span class="skills__item">TensorFlow</span>
-            <span class="skills__item">NLP</span>
-            <span class="skills__item">YOLOv8</span>
-            <span class="skills__item">Computer Vision</span>
+          <div class="skill-tags">
+            <span>LLMs</span><span>RAG</span><span>LangChain</span><span>LangGraph</span>
+            <span>LlamaIndex</span><span>Prompt Engineering</span><span>Agent Orchestration</span>
+            <span>Memory Architectures</span><span>TensorFlow</span><span>NLP</span>
+            <span>YOLOv8</span><span>Computer Vision</span>
           </div>
         </div>
 
-        <div class="skills__category reveal reveal--delay-1">
+        <div class="skill-category glass-card animate-on-scroll" id="skill-languages">
+          <div class="skill-icon-wrap"><span class="skill-icon">💻</span></div>
           <h3>Languages</h3>
-          <div class="skills__list">
-            <span class="skills__item">Python</span>
-            <span class="skills__item">JavaScript</span>
-            <span class="skills__item">TypeScript</span>
-            <span class="skills__item">C/C++</span>
-            <span class="skills__item">SQL</span>
+          <div class="skill-tags">
+            <span>Python</span><span>JavaScript</span><span>TypeScript</span>
+            <span>C/C++</span><span>SQL</span>
           </div>
         </div>
 
-        <div class="skills__category reveal reveal--delay-2">
+        <div class="skill-category glass-card animate-on-scroll" id="skill-fullstack">
+          <div class="skill-icon-wrap"><span class="skill-icon">🌐</span></div>
           <h3>Full Stack</h3>
-          <div class="skills__list">
-            <span class="skills__item">React</span>
-            <span class="skills__item">Node.js</span>
-            <span class="skills__item">Express</span>
-            <span class="skills__item">MongoDB</span>
-            <span class="skills__item">Flask</span>
-            <span class="skills__item">Django</span>
-            <span class="skills__item">FastAPI</span>
-            <span class="skills__item">REST APIs</span>
-            <span class="skills__item">Redux</span>
+          <div class="skill-tags">
+            <span>React</span><span>Node.js</span><span>Express</span><span>MongoDB</span>
+            <span>Flask</span><span>Django</span><span>FastAPI</span><span>REST APIs</span>
+            <span>Redux</span><span>React Router</span>
           </div>
         </div>
 
-        <div class="skills__category reveal">
-          <h3>IoT & Robotics</h3>
-          <div class="skills__list">
-            <span class="skills__item">IoT System Design</span>
-            <span class="skills__item">Sensor Automation</span>
-            <span class="skills__item">Drone Navigation</span>
-            <span class="skills__item">Home Automation</span>
-            <span class="skills__item">Voice Control</span>
+        <div class="skill-category glass-card animate-on-scroll" id="skill-iot">
+          <div class="skill-icon-wrap"><span class="skill-icon">📡</span></div>
+          <h3>IoT / Robotics</h3>
+          <div class="skill-tags">
+            <span>IoT System Design</span><span>Sensor Automation</span>
+            <span>Drone Navigation</span><span>Home Automation</span>
+            <span>Voice Control (STT/TTS)</span>
           </div>
         </div>
 
-        <div class="skills__category reveal reveal--delay-1">
-          <h3>Cloud & DevOps</h3>
-          <div class="skills__list">
-            <span class="skills__item">AWS</span>
-            <span class="skills__item">Azure</span>
-            <span class="skills__item">GCP</span>
-            <span class="skills__item">Docker</span>
-            <span class="skills__item">Kubernetes</span>
-            <span class="skills__item">Git</span>
-            <span class="skills__item">PostgreSQL</span>
-            <span class="skills__item">Redis</span>
+        <div class="skill-category glass-card animate-on-scroll" id="skill-blockchain">
+          <div class="skill-icon-wrap"><span class="skill-icon">⛓️</span></div>
+          <h3>Blockchain</h3>
+          <div class="skill-tags">
+            <span>Private Blockchain</span><span>Smart Contracts</span>
+            <span>Decentralized Apps</span><span>Tamper-proof Systems</span>
           </div>
         </div>
 
-        <div class="skills__category reveal reveal--delay-2">
+        <div class="skill-category glass-card animate-on-scroll" id="skill-cloud">
+          <div class="skill-icon-wrap"><span class="skill-icon">☁️</span></div>
+          <h3>Cloud / DevOps</h3>
+          <div class="skill-tags">
+            <span>AWS</span><span>Azure</span><span>GCP</span><span>Docker</span>
+            <span>Kubernetes</span><span>Git</span><span>PostgreSQL</span>
+            <span>Redis</span><span>MongoDB</span>
+          </div>
+        </div>
+
+        <div class="skill-category glass-card animate-on-scroll" id="skill-testing">
+          <div class="skill-icon-wrap"><span class="skill-icon">🧪</span></div>
+          <h3>Testing</h3>
+          <div class="skill-tags">
+            <span>Selenium WebDriver</span><span>PyTest</span>
+            <span>QA Automation</span><span>Model Validation</span>
+          </div>
+        </div>
+
+        <div class="skill-category glass-card animate-on-scroll" id="skill-research">
+          <div class="skill-icon-wrap"><span class="skill-icon">🔬</span></div>
           <h3>Research</h3>
-          <div class="skills__list">
-            <span class="skills__item">BCI / Neurotechnology</span>
-            <span class="skills__item">EEG Signal Processing</span>
-            <span class="skills__item">Human-AI Interaction</span>
-            <span class="skills__item">Cognitive Computing</span>
+          <div class="skill-tags">
+            <span>BCI / Neurotechnology</span><span>EEG Signal Processing</span>
+            <span>Human-AI Interaction</span><span>Cognitive Computing</span>
           </div>
         </div>
 
@@ -423,138 +444,169 @@
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       07 — CREDENTIALS (Education + Certifications)
-       ═══════════════════════════════════════════════════ -->
-  <section class="section" id="credentials">
+  <!-- ===================== EDUCATION ===================== -->
+  <section class="section" id="education">
     <div class="container">
-      <span class="section__label reveal">06 / 07 — Credentials</span>
-      <h2 class="section__heading reveal">Education & Certifications</h2>
-      <div class="credentials__grid">
-
-        <div class="credentials__group reveal">
-          <h3>Education</h3>
-          <div class="credential">
-            <p class="credential__title">Bachelor of Technology — Computer Science</p>
-            <p class="credential__meta">AD Patel Institute of Technology</p>
-            <p class="credential__date">2023 — 2026</p>
-          </div>
-          <div class="credential">
-            <p class="credential__title">Diploma — Information Technology</p>
-            <p class="credential__meta">Sir Bhavsinhji Polytechnic Institute</p>
-            <p class="credential__date">2020 — 2023</p>
-          </div>
-        </div>
-
-        <div class="credentials__group reveal reveal--delay-1">
-          <h3>Certifications</h3>
-          <div class="credential">
-            <p class="credential__title">Microsoft Azure Certified Data Engineer</p>
-            <p class="credential__meta">Microsoft</p>
-          </div>
-          <div class="credential">
-            <p class="credential__title">Google Cybersecurity Certificate</p>
-            <p class="credential__meta">Google</p>
-          </div>
-          <div class="credential">
-            <p class="credential__title">Google UX Design Certificate</p>
-            <p class="credential__meta">Google</p>
-          </div>
-          <div class="credential">
-            <p class="credential__title">Certified QA Automation Tester</p>
-            <p class="credential__meta">Micro1</p>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════════════
-       08 — CONTACT
-       ═══════════════════════════════════════════════════ -->
-  <section class="contact" id="contact">
-    <div class="container">
-      <span class="section__label reveal">07 / 07 — Contact</span>
-      <h2 class="contact__heading reveal">
-        Have an idea<br/>worth building?
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">05.</span> Education
       </h2>
-      <p class="contact__desc reveal">
-        I'm always open to new opportunities, collaborations, and conversations about AI, engineering, and building things that matter.
-      </p>
-      <div class="contact__links reveal">
-        <a href="mailto:pruthvijsh09@gmail.com" class="contact__link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-          pruthvijsh09@gmail.com
-        </a>
-        <a href="https://github.com/joshibhai13" target="_blank" rel="noopener noreferrer" class="contact__link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
-          GitHub
-        </a>
-        <a href="https://www.linkedin.com/in/pruthvi-joshi-737b76204/" target="_blank" rel="noopener noreferrer" class="contact__link">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-          LinkedIn
-        </a>
+      <div class="education-grid">
+        <div class="education-card glass-card animate-on-scroll">
+          <div class="edu-icon">🎓</div>
+          <h3>Bachelor of Technology — Computer Science</h3>
+          <p class="edu-institution">AD Patel Institute of Technology</p>
+          <span class="edu-year">2023 – 2026</span>
+        </div>
+        <div class="education-card glass-card animate-on-scroll">
+          <div class="edu-icon">📜</div>
+          <h3>Diploma — Information Technology</h3>
+          <p class="edu-institution">Sir Bhavsinhji Polytechnic Institute</p>
+          <span class="edu-year">2020 – 2023</span>
+        </div>
       </div>
-      <a href="mailto:pruthvijsh09@gmail.com" class="btn btn--primary btn--large reveal">
-        Say hello
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-      </a>
     </div>
   </section>
 
-  <!-- ═══════════════════════════════════════════════════
-       FOOTER
-       ═══════════════════════════════════════════════════ -->
+  <!-- ===================== CERTIFICATIONS ===================== -->
+  <section class="section section-alt" id="certifications">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">06.</span> Certifications
+      </h2>
+      <div class="certs-grid">
+        <div class="cert-card glass-card animate-on-scroll">
+          <div class="cert-icon">🏅</div>
+          <h3>Micro1 Certified QA Automation Tester</h3>
+        </div>
+        <div class="cert-card glass-card animate-on-scroll">
+          <div class="cert-icon">☁️</div>
+          <h3>Microsoft Azure Certified Data Engineer</h3>
+        </div>
+        <div class="cert-card glass-card animate-on-scroll">
+          <div class="cert-icon">🔒</div>
+          <h3>Google Cybersecurity Certificate</h3>
+        </div>
+        <div class="cert-card glass-card animate-on-scroll">
+          <div class="cert-icon">🎨</div>
+          <h3>Google UX Design Certificate</h3>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESEARCH ===================== -->
+  <section class="section" id="research">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">07.</span> R&D Interests
+      </h2>
+      <div class="research-grid">
+        <div class="research-card glass-card animate-on-scroll">
+          <div class="research-icon-wrap">
+            <div class="research-icon">🧠</div>
+            <div class="research-pulse"></div>
+          </div>
+          <h3>Neurotechnology & BCI</h3>
+          <p>EEG Signal Processing & Transcription — exploring the frontier of brain-computer interaction and neural decoding.</p>
+        </div>
+        <div class="research-card glass-card animate-on-scroll">
+          <div class="research-icon-wrap">
+            <div class="research-icon">🤝</div>
+            <div class="research-pulse"></div>
+          </div>
+          <h3>Human-AI Interaction</h3>
+          <p>Cognitive Computing & Augmented Intelligence — designing systems that enhance human cognition and creativity.</p>
+        </div>
+        <div class="research-card glass-card animate-on-scroll">
+          <div class="research-icon-wrap">
+            <div class="research-icon">🤖</div>
+            <div class="research-pulse"></div>
+          </div>
+          <h3>Robotics & Autonomous Systems</h3>
+          <p>IoT integration with autonomous systems — sensor fusion, drone navigation, and intelligent environment interaction.</p>
+        </div>
+        <div class="research-card glass-card animate-on-scroll">
+          <div class="research-icon-wrap">
+            <div class="research-icon">👁️</div>
+            <div class="research-pulse"></div>
+          </div>
+          <h3>Computer Vision & Neural Decoding</h3>
+          <p>Advanced vision models and neural signal processing for real-world perception and intelligent analysis.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section section-alt" id="contact">
+    <div class="container">
+      <h2 class="section-title animate-on-scroll">
+        <span class="section-number">08.</span> Get In Touch
+      </h2>
+      <div class="contact-content animate-on-scroll">
+        <p class="contact-text">
+          I'm currently open to new opportunities and collaborations. Whether you have a project idea,
+          a question, or just want to connect — feel free to reach out!
+        </p>
+        <div class="contact-cards">
+          <a href="mailto:pruthvijsh09@gmail.com" class="contact-card glass-card" id="contact-email">
+            <div class="contact-icon">✉️</div>
+            <span class="contact-label">Email</span>
+            <span class="contact-value">pruthvijsh09@gmail.com</span>
+          </a>
+          <a href="tel:+918128057573" class="contact-card glass-card" id="contact-phone">
+            <div class="contact-icon">📱</div>
+            <span class="contact-label">Phone</span>
+            <span class="contact-value">+91 81280 57573</span>
+          </a>
+          <div class="contact-card glass-card" id="contact-location">
+            <div class="contact-icon">📍</div>
+            <span class="contact-label">Location</span>
+            <span class="contact-value">Ahmedabad, Gujarat</span>
+          </div>
+          <a href="https://github.com/joshibhai13" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" id="contact-github">
+            <div class="contact-icon">💻</div>
+            <span class="contact-label">GitHub</span>
+            <span class="contact-value">joshibhai13</span>
+          </a>
+          <a href="https://www.linkedin.com/in/pruthvi-joshi-737b76204/" target="_blank" rel="noopener noreferrer" class="contact-card glass-card" id="contact-linkedin">
+            <div class="contact-icon">🔗</div>
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">Pruthvi Joshi</span>
+          </a>
+        </div>
+        <a href="mailto:pruthvijsh09@gmail.com" class="btn btn-primary btn-lg">
+          <span>Say Hello 👋</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
   <footer class="footer">
     <div class="container">
-      <div class="footer__inner">
-        <p class="footer__text">© 2026 Pruthvi Joshi</p>
-        <div class="footer__socials">
-          <a href="https://github.com/joshibhai13" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="GitHub">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+      <div class="footer-content">
+        <div class="footer-socials">
+          <a href="https://github.com/joshibhai13" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
           </a>
-          <a href="https://www.linkedin.com/in/pruthvi-joshi-737b76204/" target="_blank" rel="noopener noreferrer" class="footer__social" aria-label="LinkedIn">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          <a href="https://www.linkedin.com/in/pruthvi-joshi-737b76204/" target="_blank" rel="noopener noreferrer" class="footer-social-link" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
           </a>
-          <a href="mailto:pruthvijsh09@gmail.com" class="footer__social" aria-label="Email">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href="mailto:pruthvijsh09@gmail.com" class="footer-social-link" aria-label="Email">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
           </a>
         </div>
+        <p class="footer-text">
+          Designed & Built by <strong>Pruthvi Joshi</strong>
+        </p>
+        <p class="footer-copyright">© 2026 All Rights Reserved</p>
       </div>
     </div>
   </footer>
 
-  <!-- ═══════════════════════════════════════════════════
-       EASTER EGG — Terminal (Ctrl+Shift+K)
-       ═══════════════════════════════════════════════════ -->
-  <div class="terminal-overlay" id="terminalOverlay" aria-hidden="true">
-    <div class="terminal" role="dialog" aria-label="System terminal">
-      <div class="terminal__bar">
-        <span class="terminal__dot terminal__dot--red"></span>
-        <span class="terminal__dot terminal__dot--yellow"></span>
-        <span class="terminal__dot terminal__dot--green"></span>
-      </div>
-      <div class="terminal__body">
-        <p class="terminal__line terminal__line--green">$ whoami</p>
-        <p class="terminal__line">Pruthvi Joshi — AI Platform Engineer & Full Stack Developer</p>
-        <br/>
-        <p class="terminal__line terminal__line--green">$ cat skills.txt</p>
-        <p class="terminal__line">AI/ML · LLMs · Computer Vision · Full Stack · IoT · Blockchain</p>
-        <br/>
-        <p class="terminal__line terminal__line--green">$ cat status.txt</p>
-        <p class="terminal__line terminal__line--accent">Open to opportunities · Building intelligent systems</p>
-        <br/>
-        <p class="terminal__line terminal__line--green">$ cat contact.txt</p>
-        <p class="terminal__line">pruthvijsh09@gmail.com</p>
-        <p class="terminal__line">github.com/joshibhai13</p>
-        <p class="terminal__line">linkedin.com/in/pruthvi-joshi-737b76204</p>
-        <br/>
-        <p class="terminal__line" style="color: #6e6e73;">Press ESC to close</p>
-      </div>
-    </div>
-  </div>
-
   <script src="script.js"></script>
 </body>
 </html>
+
+<!-- Deployment trigger -->
