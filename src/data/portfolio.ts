@@ -24,8 +24,8 @@ export const profile = {
   },
   resumePdf: '#',
   portrait: {
-    src: '/assets/portrait-720.webp',
-    srcSet: '/assets/portrait-420.webp 420w, /assets/portrait-720.webp 720w, /assets/portrait-1100.webp 1100w',
+    src: '/portfolio/assets/portrait-720.webp',
+    srcSet: '/portfolio/assets/portrait-420.webp 420w, /portfolio/assets/portrait-720.webp 720w, /portfolio/assets/portrait-1100.webp 1100w',
     alt: 'Portrait of Pruthvi Joshi',
   },
   interests: ['System Design', 'Machine Learning', 'Computer Vision'],
