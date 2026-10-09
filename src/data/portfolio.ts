@@ -7,53 +7,53 @@
 export type Palette = { from: string; via: string; to: string; accent: string };
 
 export const profile = {
-  fullName: 'Dasari Venkata Ratna Sri Sushmita',
-  displayName: 'Sushmita Dasari',
-  firstName: 'SUSHMITA',
+  fullName: 'Pruthvi Joshi',
+  displayName: 'Pruthvi Joshi',
+  firstName: 'PRUTHVI',
   seriesTag: 'THE SERIES',
   /** Fictional studio card shown at the very start of the opening sequence. */
-  originalLabel: 'A DASARI ORIGINAL',
+  originalLabel: 'A JOSHI ORIGINAL',
   role: 'Full-Stack Developer',
   tagline: ['Full-Stack Developer', 'AI / ML', 'Java'],
   intro:
-    'A B.Tech Artificial Intelligence & Machine Learning student (CGPA 9.10) and full-stack developer building AI-powered platforms, payment systems and multi-tenant SaaS with Java, Python, React, Node.js and Docker.',
-  location: 'Surampalem, Andhra Pradesh',
-  email: 'sushmitadasari17@gmail.com',
+    'A results-driven AI Platform Engineer and UI/UX Designer building intelligent, scalable systems across AI, LLMs, Computer Vision, Automation, IoT, and Full Stack Development.',
+  location: 'Ahmedabad, Gujarat',
+  email: 'pruthvijsh09@gmail.com',
   links: {
-    linkedin: 'https://www.linkedin.com/in/sushmita-dasari-227a40284/',
-    github: 'https://github.com/Sushmitadasari',
+    linkedin: 'https://www.linkedin.com/in/pruthvi-joshi-737b76204/',
+    github: 'https://github.com/joshibhai13',
   },
   resumePdf: '/assets/Sushmita_Dasari_Resume.pdf',
   portrait: {
     src: '/assets/portrait-720.webp',
     srcSet: '/assets/portrait-420.webp 420w, /assets/portrait-720.webp 720w, /assets/portrait-1100.webp 1100w',
-    alt: 'Portrait of Sushmita Dasari',
+    alt: 'Portrait of Pruthvi Joshi',
   },
   interests: ['System Design', 'Cloud Computing (AWS)', 'Machine Learning'],
 };
 
 export const education = [
   {
-    school: 'Aditya Engineering College',
-    place: 'Surampalem',
-    degree: 'Bachelor of Technology — Artificial Intelligence and Machine Learning',
+    school: 'AD Patel Institute of Technology',
+    place: 'Gujarat',
+    degree: 'Bachelor of Technology — Computer Science & Design',
     period: 'October 2023 – Present',
-    score: 'CGPA 9.10',
+    score: '',
   },
   {
-    school: 'Sri Chaitanya Junior College',
-    place: 'Kakinada',
-    degree: 'BIEAP — MPC',
+    school: 'Sir Bhavsinhji Polytechnic Institute',
+    place: 'Gujarat',
+    degree: 'Diploma — Information Technology',
     period: 'June 2021 – May 2023',
-    score: 'Score 925/1000',
+    score: '',
   },
 ];
 
 export const experience = [
   {
-    company: 'Technical Hub Pvt Ltd',
-    role: 'Trainee',
-    place: 'Surampalem, AP',
+    company: 'Foiwe Info Global Solutions',
+    role: 'System Analyst — AI & Automation',
+    place: 'Gujarat, AP',
     period: 'May 2025 – June 2026',
     points: [
       'Completed one year of intensive Full-Stack Development (FSD) training covering frontend, backend, database integration, and deployment workflows.',
@@ -107,8 +107,8 @@ export const projects: Project[] = [
       { value: '45%', label: 'faster decision turnaround' },
       { value: '8', label: 'policy categories' },
     ],
-    // The resume links to https://github.com/Sushmitadasari/PolicyGuard-AI, which is not public yet (404).
-    // Add `github: 'https://github.com/Sushmitadasari/PolicyGuard-AI',` back once the repo is public.
+    // The resume links to https://github.com/joshibhai13/PolicyGuard-AI, which is not public yet (404).
+    // Add `github: 'https://github.com/joshibhai13/PolicyGuard-AI',` back once the repo is public.
     palette: { from: '#2a0610', via: '#7a0f24', to: '#0b0710', accent: '#ff3d5a' },
     motif: 'shield',
   },
@@ -136,7 +136,7 @@ export const projects: Project[] = [
       { value: '40%', label: 'faster API response' },
       { value: '3×', label: 'throughput under load' },
     ],
-    github: 'https://github.com/Sushmitadasari/Payment-gateway-system-Project',
+    github: 'https://github.com/joshibhai13/Payment-gateway-system-Project',
     palette: { from: '#1a0d02', via: '#8a4a07', to: '#0a0806', accent: '#ffb547' },
     motif: 'flow',
   },
@@ -163,7 +163,7 @@ export const projects: Project[] = [
       { value: '0', label: 'unauthorized-access incidents' },
       { value: '45m → <2m', label: 'environment setup time' },
     ],
-    github: 'https://github.com/Sushmitadasari/Multi-Tenant-SaaS-Platform',
+    github: 'https://github.com/joshibhai13/Multi-Tenant-SaaS-Platform',
     palette: { from: '#04121f', via: '#0f4c6e', to: '#05080d', accent: '#4cc9ff' },
     motif: 'tenants',
   },
@@ -379,12 +379,12 @@ export const seasons: Season[] = [
     number: 1,
     title: 'The Beginning',
     period: '2021 – 2023',
-    synopsis: 'Intermediate years at Sri Chaitanya Junior College, Kakinada — Mathematics, Physics and Chemistry.',
+    synopsis: 'Intermediate years at Sir Bhavsinhji Polytechnic Institute, Gujarat — Mathematics, Physics and Chemistry.',
     episodes: [
       {
         code: 'S01 E01',
         title: 'The Foundation',
-        description: 'BIEAP, MPC at Sri Chaitanya Junior College, Kakinada — finishing with a score of 925/1000.',
+        description: 'BIEAP, MPC at Sir Bhavsinhji Polytechnic Institute, Gujarat — finishing with a score of 925/1000.',
         tags: ['MPC', 'BIEAP'],
         runtime: 'Jun 2021 – May 2023',
         palette: amber,
@@ -395,13 +395,13 @@ export const seasons: Season[] = [
     number: 2,
     title: 'Enter: AI & ML',
     period: '2023 – Present',
-    synopsis: 'B.Tech in Artificial Intelligence and Machine Learning at Aditya Engineering College, Surampalem.',
+    synopsis: 'B.Tech in Artificial Intelligence and Machine Learning at AD Patel Institute of Technology, Gujarat.',
     episodes: [
       {
         code: 'S02 E01',
         title: 'The Engineer',
-        description: 'Bachelor of Technology in Artificial Intelligence and Machine Learning — CGPA 9.10.',
-        tags: ['B.Tech', 'AI & ML', 'CGPA 9.10'],
+        description: 'Bachelor of Technology in Artificial Intelligence and Machine Learning — .',
+        tags: ['B.Tech', 'AI & ML', ''],
         runtime: 'Oct 2023 – Present',
         palette: violet,
       },
@@ -427,11 +427,11 @@ export const seasons: Season[] = [
     number: 3,
     title: 'Learning to Build',
     period: '2025 – 2026',
-    synopsis: 'One year of intensive Full-Stack Development training as a Trainee at Technical Hub Pvt Ltd.',
+    synopsis: 'One year of intensive Full-Stack Development training as a System Analyst — AI & Automation at Foiwe Info Global Solutions.',
     episodes: [
       {
         code: 'S03 E01',
-        title: 'The Trainee',
+        title: 'The System Analyst — AI & Automation',
         description: 'Intensive Full-Stack Development training covering frontend, backend, database integration and deployment workflows.',
         tags: ['FSD', 'Frontend', 'Backend', 'Databases'],
         runtime: 'May 2025 – Jun 2026',
@@ -515,7 +515,7 @@ export const topPicks: TopPick[] = [
   { label: 'Academic high', title: 'Branch Topper', detail: '9.24 SGPA in AI & ML', palette: jade },
   { label: 'Cloud credential', title: 'AWS AI Practitioner', detail: 'AWS Certified', palette: amber },
   { label: 'Problems solved', title: '850+', detail: 'LeetCode 350+ • GFG 300+ • CodeChef 200+', palette: crimson },
-  { label: 'The training arc', title: '1 Year of FSD', detail: 'Technical Hub Pvt Ltd', palette: ocean },
+  { label: 'The training arc', title: '1 Year of FSD', detail: 'Foiwe Info Global Solutions', palette: ocean },
   { label: 'Database credential', title: 'MongoDB', detail: 'Certified Associate Developer', palette: jade },
   { label: 'Current focus', title: 'System Design', detail: 'with Cloud (AWS) & Machine Learning', palette: violet },
 ];
@@ -527,8 +527,8 @@ export const introSlides: IntroSlide[] = [
   {
     kicker: 'Education',
     title: 'B.Tech · AI & ML',
-    lines: ['Aditya Engineering College, Surampalem', 'October 2023 – Present'],
-    chips: ['CGPA 9.10'],
+    lines: ['AD Patel Institute of Technology, Gujarat', 'October 2023 – Present'],
+    chips: [''],
   },
   {
     kicker: 'Skills',
@@ -539,7 +539,7 @@ export const introSlides: IntroSlide[] = [
   {
     kicker: 'Training',
     title: 'The Training Arc',
-    lines: ['One year of intensive Full‑Stack Development training', 'Trainee · Technical Hub Pvt Ltd · May 2025 – June 2026', 'Frontend · Backend · Databases · Deployment'],
+    lines: ['One year of intensive Full‑Stack Development training', 'System Analyst — AI & Automation · Foiwe Info Global Solutions · May 2025 – June 2026', 'Frontend · Backend · Databases · Deployment'],
   },
   {
     kicker: 'Projects',
