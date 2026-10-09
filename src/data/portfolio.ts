@@ -22,7 +22,7 @@ export const profile = {
     linkedin: 'https://www.linkedin.com/in/pruthvi-joshi-737b76204/',
     github: 'https://github.com/joshibhai13',
   },
-  resumePdf: '#',
+  resumePdf: '/portfolio/assets/Pruthvi_Joshi_Resume.pdf',
   portrait: {
     src: '/portfolio/assets/portrait-720.webp',
     srcSet: '/portfolio/assets/portrait-420.webp 420w, /portfolio/assets/portrait-720.webp 720w, /portfolio/assets/portrait-1100.webp 1100w',
